@@ -2547,6 +2547,70 @@ img { display: block; max-width: 100%; }
   .footer-links-row { grid-template-columns: 1fr; gap: 1.25rem; }
 }
 
+/* ── Theme toggle button ────────────────────────────────────────────────── */
+.theme-toggle {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--cream);
+  border-radius: 8px;
+  padding: 0.38rem 0.45rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LIGHT MODE OVERRIDES
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Navbar */
+[data-theme="light"] .navbar { background: #ffffff; box-shadow: 0 1px 0 #e8e2da; }
+[data-theme="light"] .navbar::after { display: none; }
+[data-theme="light"] .navbar-brand { color: var(--ink); }
+[data-theme="light"] .navbar-brand span { color: var(--green-mid); }
+[data-theme="light"] .navbar-audience-pill { color: var(--ink-light); border-color: var(--border); }
+[data-theme="light"] .navbar-audience-pill:hover { color: var(--green); }
+[data-theme="light"] .navbar-search-pill { background: #f3ede5; border-color: var(--border); }
+[data-theme="light"] .navbar-search-pill input { color: var(--ink); }
+[data-theme="light"] .navbar-search-pill input::placeholder { color: #999; }
+[data-theme="light"] .navbar-hamburger span { background: var(--ink); }
+[data-theme="light"] .navbar-mobile-menu { background: #ffffff; border-color: var(--border); }
+[data-theme="light"] .navbar-mobile-links a,
+[data-theme="light"] .navbar-mobile-links button { color: var(--ink); border-color: var(--border); }
+[data-theme="light"] .theme-toggle { border-color: var(--border); color: var(--ink); }
+[data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.05); border-color: #ccc; }
+
+/* Feed hero */
+[data-theme="light"] .feed-hero { background: var(--cream-dark); color: var(--ink); border-bottom-color: var(--green-light); }
+[data-theme="light"] .feed-hero-left h1 { color: var(--ink); }
+[data-theme="light"] .feed-hero-left p { color: var(--ink-light); }
+[data-theme="light"] .hero-stat-card { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); }
+[data-theme="light"] .hero-stat-number { color: var(--ink); }
+[data-theme="light"] .hero-stat-card-accent { background: rgba(6,95,70,0.08); border-color: rgba(6,95,70,0.25); }
+[data-theme="light"] .hero-mockup-card-back,
+[data-theme="light"] .hero-mockup-card-front { background: #ffffff; border-color: var(--border); box-shadow: var(--shadow-md); }
+[data-theme="light"] .hmc-tag,
+[data-theme="light"] .hmc-meta { color: var(--ink-muted); }
+[data-theme="light"] .hmc-title { color: var(--ink); }
+[data-theme="light"] .hmc-oneliner { color: var(--ink-light); }
+[data-theme="light"] .hero-mockup-pill { background: rgba(0,0,0,0.07); color: var(--ink-light); }
+
+/* Pitch cards */
+[data-theme="light"] .pitch-card { background: #ffffff; border-color: #e8e2da; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+[data-theme="light"] .pitch-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,.12), 0 0 0 1px rgba(6,95,70,.2); }
+[data-theme="light"] .pitch-card-industry { color: var(--green); background: rgba(6,95,70,0.08); }
+[data-theme="light"] .pitch-card-title { color: var(--ink); }
+[data-theme="light"] .pitch-card-oneliner { color: var(--ink-light); }
+[data-theme="light"] .author-avatar { background: var(--green); color: #fff; }
+[data-theme="light"] .author-name { color: var(--ink); }
+[data-theme="light"] .author-date { color: var(--ink-muted); }
+[data-theme="light"] .feedback-badge,
+[data-theme="light"] .would-use-badge { background: rgba(0,0,0,.05); color: var(--ink-light); border-color: transparent; }
+
 /* ── Large desktop (≥ 1400px) ──────────────────────────────────────────── */
 @media (min-width: 1400px) {
   .container           { max-width: 1320px; }
