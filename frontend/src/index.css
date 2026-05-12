@@ -38,7 +38,7 @@ img { display: block; max-width: 100%; }
 
 /* ── Layout ── */
 .container { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
-.page { padding: 3rem 0 5rem; }
+.page { padding: 3rem 0 2.5rem; }
 
 /* ── Navbar ── */
 .navbar {
@@ -1783,7 +1783,7 @@ img { display: block; max-width: 100%; }
 .footer {
   background: #0f0f0f;
   color: var(--cream);
-  margin-top: 5rem;
+  margin-top: 2rem;
   position: relative;
   overflow: hidden;
 }
