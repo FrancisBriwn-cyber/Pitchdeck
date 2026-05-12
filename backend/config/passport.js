@@ -45,6 +45,9 @@ passport.use(
 );
 
 // ── GitHub ────────────────────────────────────────────────────────────────────
+if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
+  console.warn('[passport] GITHUB_CLIENT_ID or GITHUB_CLIENT_SECRET not set — GitHub OAuth disabled.');
+} else
 passport.use(
   new GitHubStrategy(
     {
