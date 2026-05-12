@@ -2538,3 +2538,35 @@ img { display: block; max-width: 100%; }
   /* Footer */
   .footer-links-row { grid-template-columns: 1fr; gap: 1.25rem; }
 }
+
+/* ── Large desktop (≥ 1400px) ──────────────────────────────────────────── */
+@media (min-width: 1400px) {
+  .container           { max-width: 1320px; }
+  .feed-hero-inner     { max-width: 1320px; }
+
+  /* Lock pitch grid to 3 columns so auto-fill doesn't jump to 4 too early */
+  .pitch-grid          { grid-template-columns: repeat(3, 1fr); }
+
+  /* Give SinglePitch a slightly wider sidebar */
+  .sp-layout           { grid-template-columns: 1fr 340px; gap: 2.5rem; }
+
+  /* Give the search pill more room */
+  .navbar-search       { max-width: 440px; }
+}
+
+/* ── Wide monitor (≥ 1600px) ───────────────────────────────────────────── */
+@media (min-width: 1600px) {
+  .container           { max-width: 1520px; }
+  .feed-hero-inner     { max-width: 1520px; gap: 5rem; }
+  .feed-hero           { padding: 6rem 0 5rem; }
+
+  /* 4-column pitch grid on very wide screens */
+  .pitch-grid          { grid-template-columns: repeat(4, 1fr); }
+
+  /* Wider sidebar on SinglePitch */
+  .sp-layout           { grid-template-columns: 1fr 380px; gap: 3rem; }
+
+  /* More breathing room in the navbar */
+  .navbar-search       { max-width: 520px; }
+  .navbar-inner        { gap: 1.75rem; }
+}
