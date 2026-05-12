@@ -9,6 +9,26 @@ import api from '../api/axios';
 import PitchCard from '../components/PitchCard';
 import { useAuth } from '../context/AuthContext';
 
+/* ── Animated number counter (smoothstep easing) ── */
+function useCounter(target, active) {
+  const [val, setVal] = useState(0);
+  const raf = useRef(null);
+  useEffect(() => {
+    if (!active || !target) return;
+    const duration = 900;
+    const start = performance.now();
+    const tick = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p;
+      setVal(Math.round(ease * target));
+      if (p < 1) raf.current = requestAnimationFrame(tick);
+    };
+    raf.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf.current);
+  }, [target, active]);
+  return val;
+}
+
 /* ── Guest landing shown to unauthenticated visitors ── */
 function GuestLanding({ pitches, loading }) {
   return (
@@ -30,7 +50,7 @@ function GuestLanding({ pitches, loading }) {
         <div className="container guest-hero-inner">
           <span className="guest-hero-eyebrow">The Startup Idea Exchange</span>
           <h1 className="guest-hero-title">
-            Where bold ideas meet<br />honest feedback.
+            Get torn apart by builders<br />before you write a line of code.
           </h1>
           <p className="guest-hero-sub">
             Founders post their startup pitches. Builders give structured, honest feedback.
@@ -225,6 +245,8 @@ export default function Feed() {
   }, []);
 
   const totalFeedback = pitches.reduce((a, p) => a + Number(p.feedback_count || 0), 0);
+  const countedPitches = useCounter(pitches.length, !loading);
+  const countedFeedback = useCounter(totalFeedback, !loading);
 
   if (!user) {
     return <GuestLanding pitches={pitches} loading={loading} />;
@@ -238,7 +260,7 @@ export default function Feed() {
 
           <div className="feed-hero-left">
             <span className="feed-hero-eyebrow">The Startup Idea Exchange</span>
-            <h1>Where bold ideas meet<br />honest feedback.</h1>
+            <h1>Get torn apart by builders<br />before you write a line of code.</h1>
             <p>Every pitch here is a problem someone is trying to solve. Browse, give feedback, or share your own idea.</p>
 
             <div className="feed-hero-ctas">
@@ -255,11 +277,11 @@ export default function Feed() {
 
             <div className="feed-hero-stats">
               <div className="hero-stat-card">
-                <span className="hero-stat-number">{loading ? '…' : pitches.length}</span>
+                <span className="hero-stat-number">{loading ? '…' : countedPitches}</span>
                 <span className="hero-stat-label">Pitches Live</span>
               </div>
               <div className="hero-stat-card">
-                <span className="hero-stat-number">{loading ? '…' : totalFeedback}</span>
+                <span className="hero-stat-number">{loading ? '…' : countedFeedback}</span>
                 <span className="hero-stat-label">Feedback Given</span>
               </div>
               <div className="hero-stat-card hero-stat-card-accent">
@@ -330,7 +352,7 @@ export default function Feed() {
 
         {!loading && !error && pitches.length > 0 && (
           <div className="pitch-grid">
-            {pitches.map((p) => <PitchCard key={p.id} pitch={p} />)}
+            {pitches.map((p, i) => <PitchCard key={p.id} pitch={p} index={i} />)}
           </div>
         )}
       </div>
