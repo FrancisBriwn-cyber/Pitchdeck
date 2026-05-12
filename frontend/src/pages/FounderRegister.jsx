@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
+import { Lightbulb, Hammer, Rocket, TrendingUp, MessageSquare, Users, DollarSign, Wrench, FlaskConical, Compass } from 'lucide-react';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 
-const GOOGLE_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/google`;
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const GOOGLE_URL = `${API_BASE}/api/auth/google`;
+const GITHUB_URL  = `${API_BASE}/api/auth/github`;
 
 const STAGES = [
-  { value: 'idea',     emoji: '💡', label: 'Just an Idea',       desc: 'I have a concept but nothing built yet' },
-  { value: 'mvp',      emoji: '🔨', label: 'Building MVP',        desc: 'Actively developing the product' },
-  { value: 'launched', emoji: '🚀', label: 'Launched',            desc: 'Live with real users' },
-  { value: 'traction', emoji: '📈', label: 'Early Traction',      desc: 'Growing users or revenue' },
+  { value: 'idea',     icon: <Lightbulb size={18} />, label: 'Just an Idea',   desc: 'I have a concept but nothing built yet' },
+  { value: 'mvp',      icon: <Hammer size={18} />,    label: 'Building MVP',   desc: 'Actively developing the product' },
+  { value: 'launched', icon: <Rocket size={18} />,    label: 'Launched',       desc: 'Live with real users' },
+  { value: 'traction', icon: <TrendingUp size={18} />,label: 'Early Traction', desc: 'Growing users or revenue' },
 ];
 
 const INDUSTRIES = [
@@ -26,12 +29,12 @@ const TEAM_SIZES = [
 ];
 
 const LOOKING_FOR = [
-  { value: 'feedback',   label: '💬 Honest feedback' },
-  { value: 'cofounder',  label: '🤝 Co-founder' },
-  { value: 'investors',  label: '💰 Investors / Angels' },
-  { value: 'builders',   label: '🔧 Builders to join' },
-  { value: 'beta',       label: '🧪 Beta testers' },
-  { value: 'mentors',    label: '🧭 Mentors / Advisors' },
+  { value: 'feedback',  icon: <MessageSquare size={14} />, label: 'Honest feedback' },
+  { value: 'cofounder', icon: <Users size={14} />,         label: 'Co-founder' },
+  { value: 'investors', icon: <DollarSign size={14} />,    label: 'Investors / Angels' },
+  { value: 'builders',  icon: <Wrench size={14} />,        label: 'Builders to join' },
+  { value: 'beta',      icon: <FlaskConical size={14} />,  label: 'Beta testers' },
+  { value: 'mentors',   icon: <Compass size={14} />,       label: 'Mentors / Advisors' },
 ];
 
 function MarketingPanel({ step }) {
@@ -43,9 +46,9 @@ function MarketingPanel({ step }) {
           {step === 1 ? 'Stop keeping your idea in a notes app.' : 'Tell us about your journey.'}
         </h2>
         <ul className="auth-marketing-bullets">
-          <li><span className="auth-bullet-check">✓</span><span>Post your pitch and get discovered by builders worldwide</span></li>
-          <li><span className="auth-bullet-check">✓</span><span>Receive structured, honest feedback from real people</span></li>
-          <li><span className="auth-bullet-check">✓</span><span>Pressure-test your idea before spending a dollar</span></li>
+          <li><span className="auth-bullet-check">✓</span><span>Post your pitch in minutes — no investor deck needed</span></li>
+          <li><span className="auth-bullet-check">✓</span><span>Hear what builders actually think, not what friends politely say</span></li>
+          <li><span className="auth-bullet-check">✓</span><span>Know if your idea has legs before you commit to building it</span></li>
         </ul>
         <div className="auth-marketing-divider" />
         <div className="auth-marketing-stat">
@@ -103,7 +106,7 @@ export default function FounderRegister() {
       loginUser(res.data.user, res.data.token);
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.error || 'Registration failed.');
+      setError(err.message);
       if (err.response?.status === 400) setStep(1);
     } finally { setLoading(false); }
   };
@@ -126,20 +129,28 @@ export default function FounderRegister() {
           {/* ── STEP 1: Account ── */}
           {step === 1 && (
             <>
-              <div className="auth-role-badge auth-role-founder">🚀 Founder</div>
+              <div className="auth-role-badge auth-role-founder"><Rocket size={13} /> Founder</div>
               <div className="form-eyebrow">Create Your Account</div>
               <h1>Join as a Founder</h1>
-              <p className="form-subtitle">Share your startup idea and get real feedback from builders worldwide.</p>
+              <p className="form-subtitle">Create an account to start sharing your idea with builders worldwide.</p>
 
-              <a href={GOOGLE_URL} className="btn-google">
-                <svg width="18" height="18" viewBox="0 0 18 18">
-                  <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/>
-                  <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/>
-                  <path fill="#FBBC05" d="M3.964 10.706A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.038l3.007-2.332z"/>
-                  <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.962L3.964 7.294C4.672 5.163 6.656 3.58 9 3.58z"/>
-                </svg>
-                Continue with Google
-              </a>
+              <div className="oauth-row">
+                <a href={GOOGLE_URL} className="btn-google">
+                  <svg width="18" height="18" viewBox="0 0 18 18">
+                    <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/>
+                    <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/>
+                    <path fill="#FBBC05" d="M3.964 10.706A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.038l3.007-2.332z"/>
+                    <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.962L3.964 7.294C4.672 5.163 6.656 3.58 9 3.58z"/>
+                  </svg>
+                  Google
+                </a>
+                <a href={GITHUB_URL} className="btn-github">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                  </svg>
+                  GitHub
+                </a>
+              </div>
 
               <div className="form-divider">or sign up with email</div>
 
@@ -166,7 +177,7 @@ export default function FounderRegister() {
           {/* ── STEP 2: Founder Profile ── */}
           {step === 2 && (
             <>
-              <div className="auth-role-badge auth-role-founder">🚀 Founder Profile</div>
+              <div className="auth-role-badge auth-role-founder"><Rocket size={13} /> Founder Profile</div>
               <div className="form-eyebrow">Almost there</div>
               <h1>Tell us about your startup</h1>
               <p className="form-subtitle">This helps the community give you more relevant feedback.</p>
@@ -184,7 +195,7 @@ export default function FounderRegister() {
                         className={`stage-card ${form.stage === s.value ? 'stage-card-active' : ''}`}
                         onClick={() => setForm({ ...form, stage: s.value })}
                       >
-                        <span className="stage-card-emoji">{s.emoji}</span>
+                        <span className="stage-card-icon">{s.icon}</span>
                         <span className="stage-card-label">{s.label}</span>
                         <span className="stage-card-desc">{s.desc}</span>
                       </button>
@@ -229,7 +240,7 @@ export default function FounderRegister() {
                         className={`pill-option ${form.looking_for.includes(l.value) ? 'pill-option-active' : ''}`}
                         onClick={() => toggleLooking(l.value)}
                       >
-                        {l.label}
+                        {l.icon} {l.label}
                       </button>
                     ))}
                   </div>

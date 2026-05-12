@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
+import { Rocket, Wrench } from 'lucide-react';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 
-const GOOGLE_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/google`;
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const GOOGLE_URL = `${API_BASE}/api/auth/google`;
+const GITHUB_URL = `${API_BASE}/api/auth/github`;
 
 const GoogleSVG = () => (
   <svg width="18" height="18" viewBox="0 0 18 18">
@@ -14,85 +17,55 @@ const GoogleSVG = () => (
   </svg>
 );
 
-const CONTENT = {
+const GitHubSVG = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+  </svg>
+);
+
+const PANEL = {
   founder: {
-    register: {
-      eyebrow: 'Join as a Founder',
-      title: 'Launch your pitch',
-      subtitle: 'Share your startup idea and get structured feedback from real builders worldwide.',
-      divider: 'or sign up with email',
-      cta: 'Create Founder Account →',
-      ctaLoading: 'Creating account...',
-      toggle: <p>Already have an account? <Link to="/founder/login">Log in as Founder</Link></p>,
-      panel: {
-        eyebrow: 'For Founders',
-        headline: 'Stop keeping your idea in a notes app.',
-        bullets: [
-          'Post your startup pitch in minutes — no lengthy forms',
-          'Get structured, honest feedback from builders worldwide',
-          'Pressure-test your idea before you spend a dollar building it',
-        ],
-        stat: { number: '100% Free', label: 'No fees. No gatekeepers. Just ideas.' },
-      },
-    },
     login: {
-      eyebrow: 'Founder Login',
-      title: 'Welcome back',
-      subtitle: 'Log in to manage your pitches and read your latest feedback.',
-      divider: 'or log in with email',
-      cta: 'Log In as Founder →',
-      ctaLoading: 'Logging in...',
-      toggle: <p>No account yet? <Link to="/founder/register">Sign up as a Founder</Link></p>,
-      panel: {
-        eyebrow: 'For Founders',
-        headline: 'Your next pitch is one post away.',
-        bullets: [
-          'See all the feedback your pitches have received',
-          'Edit and refine your idea based on community input',
-          'Track how your concept resonates with real builders',
-        ],
-        stat: { number: '20+ Pitches', label: 'Live on the platform right now.' },
-      },
+      eyebrow: 'For Founders',
+      headline: 'Your community is waiting.',
+      bullets: [
+        'See every piece of feedback your pitches have collected',
+        'Sharpen your idea based on input from people who actually build',
+        'Track which parts of your pitch land — and which fall flat',
+      ],
+      stat: { number: '20+ Pitches', label: 'Live on the platform right now.' },
+    },
+    register: {
+      eyebrow: 'For Founders',
+      headline: 'Stop keeping your idea in a notes app.',
+      bullets: [
+        'Post your pitch in under 5 minutes — no deck required',
+        'Get honest feedback from builders who know what ships',
+        'Find out if your idea has legs before you write a single line of code',
+      ],
+      stat: { number: '100% Free', label: 'No fees. No gatekeepers. Just ideas.' },
     },
   },
   builder: {
-    register: {
-      eyebrow: 'Join as a Builder',
-      title: 'Find ideas worth building',
-      subtitle: 'Discover early-stage startups, share your expertise, and leave feedback that shapes real products.',
-      divider: 'or sign up with email',
-      cta: 'Create Builder Account →',
-      ctaLoading: 'Creating account...',
-      toggle: <p>Already have an account? <Link to="/builder/login">Log in as Builder</Link></p>,
-      panel: {
-        eyebrow: 'For Builders',
-        headline: "Find your next project before it's built.",
-        bullets: [
-          'Browse early-stage pitches from founders worldwide',
-          'Share expert feedback and directly shape real products',
-          'Discover problems worth solving before anyone else does',
-        ],
-        stat: { number: '100% Free', label: 'No fees. No gatekeepers. Just ideas.' },
-      },
-    },
     login: {
-      eyebrow: 'Builder Login',
-      title: 'Welcome back',
-      subtitle: 'Log in to discover new pitches and continue giving feedback.',
-      divider: 'or log in with email',
-      cta: 'Log In as Builder →',
-      ctaLoading: 'Logging in...',
-      toggle: <p>No account yet? <Link to="/builder/register">Sign up as a Builder</Link></p>,
-      panel: {
-        eyebrow: 'For Builders',
-        headline: 'Good builders shape great ideas.',
-        bullets: [
-          'Review the latest pitches from founders around the world',
-          'Give structured feedback that actually helps founders improve',
-          'Spot the problems worth solving before anyone else does',
-        ],
-        stat: { number: '100+', label: 'Feedback entries shared so far.' },
-      },
+      eyebrow: 'For Builders',
+      headline: 'Good builders shape great ideas.',
+      bullets: [
+        'See what founders have posted since your last visit',
+        'Leave feedback that actually moves an idea forward',
+        'Spot the next interesting problem before it becomes obvious',
+      ],
+      stat: { number: '100+', label: 'Feedback entries shared so far.' },
+    },
+    register: {
+      eyebrow: 'For Builders',
+      headline: "Find your next project before it's built.",
+      bullets: [
+        'Browse raw, early-stage ideas from founders worldwide',
+        'Give the kind of feedback friends won\'t — honest and specific',
+        'Spot problems worth solving while everyone else is still asleep',
+      ],
+      stat: { number: '100% Free', label: 'No fees. No gatekeepers. Just ideas.' },
     },
   },
 };
@@ -121,22 +94,28 @@ function MarketingPanel({ content }) {
   );
 }
 
-export default function AuthPage({ role, mode }) {
+// role prop is optional — omitting it enables the built-in role tab switcher
+export default function AuthPage({ role: roleProp, mode }) {
   const { user, loading: authLoading, login: loginUser } = useAuth();
   const navigate = useNavigate();
   const isRegister = mode === 'register';
-  const content = CONTENT[role][mode];
+  const unified = !roleProp;
 
+  const [role, setRole] = useState(roleProp ?? 'founder');
   const [form, setForm] = useState(
     isRegister ? { name: '', email: '', password: '' } : { email: '', password: '' }
   );
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Already logged in — send straight to feed
   if (!authLoading && user) return <Navigate to="/" replace />;
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const switchRole = (next) => {
+    setRole(next);
+    setError('');
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -148,27 +127,67 @@ export default function AuthPage({ role, mode }) {
       loginUser(res.data.user, res.data.token);
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.error || `${isRegister ? 'Registration' : 'Login'} failed.`);
+      setError(err.message);
     } finally { setLoading(false); }
   };
+
+  const panel = PANEL[role][mode];
 
   return (
     <div className="auth-split">
       <div className="auth-split-form">
         <div className="auth-split-inner">
-          <div className={`auth-role-badge auth-role-${role}`}>{role === 'founder' ? '🚀 Founder' : '🔧 Builder'}</div>
-          <div className="form-eyebrow">{content.eyebrow}</div>
-          <h1>{content.title}</h1>
-          <p className="form-subtitle">{content.subtitle}</p>
+
+          {/* Role tab switcher — shown only on unified routes */}
+          {unified ? (
+            <div className="auth-role-tabs">
+              <button
+                className={`auth-role-tab ${role === 'founder' ? 'auth-role-tab-active' : ''}`}
+                onClick={() => switchRole('founder')}
+                type="button"
+              >
+                <Rocket size={14} /> Founder
+              </button>
+              <button
+                className={`auth-role-tab ${role === 'builder' ? 'auth-role-tab-active' : ''}`}
+                onClick={() => switchRole('builder')}
+                type="button"
+              >
+                <Wrench size={14} /> Builder
+              </button>
+            </div>
+          ) : (
+            <div className={`auth-role-badge auth-role-${role}`}>
+              {role === 'founder' ? <><Rocket size={13} /> Founder</> : <><Wrench size={13} /> Builder</>}
+            </div>
+          )}
+
+          <h1>{isRegister ? (role === 'founder' ? 'Launch your pitch' : 'Find ideas worth building') : 'Welcome back'}</h1>
+          <p className="form-subtitle">
+            {isRegister
+              ? role === 'founder'
+                ? 'Post your pitch and get honest feedback from builders who know what works.'
+                : 'Browse early-stage pitches and share expertise that actually helps founders ship.'
+              : role === 'founder'
+                ? 'Welcome back — your latest feedback is waiting.'
+                : 'Welcome back — new pitches have been posted since you were last here.'
+            }
+          </p>
 
           {error && <div className="alert alert-error">{error}</div>}
 
-          <a href={GOOGLE_URL} className="btn-google">
-            <GoogleSVG />
-            Continue with Google
-          </a>
+          <div className="oauth-row">
+            <a href={GOOGLE_URL} className="btn-google">
+              <GoogleSVG />
+              Google
+            </a>
+            <a href={GITHUB_URL} className="btn-github">
+              <GitHubSVG />
+              GitHub
+            </a>
+          </div>
 
-          <div className="form-divider">{content.divider}</div>
+          <div className="form-divider">{isRegister ? 'or sign up with email' : 'or log in with email'}</div>
 
           <form onSubmit={handleSubmit}>
             {isRegister && (
@@ -186,20 +205,22 @@ export default function AuthPage({ role, mode }) {
               <input type="password" name="password" required placeholder={isRegister ? 'Min. 8 characters' : 'Your password'} value={form.password} onChange={handleChange} />
             </div>
             <button type="submit" className="btn btn-primary btn-full" disabled={loading}>
-              {loading ? content.ctaLoading : content.cta}
+              {loading
+                ? isRegister ? 'Creating account...' : 'Logging in...'
+                : isRegister ? 'Create Account →' : 'Log In →'}
             </button>
           </form>
 
-          <div className="form-footer">{content.toggle}</div>
-          <div className="form-footer" style={{ marginTop: '0.5rem' }}>
-            {role === 'founder'
-              ? <><Link to="/builder/login">Switch to Builder login</Link></>
-              : <><Link to="/founder/login">Switch to Founder login</Link></>
+          <div className="form-footer">
+            {isRegister
+              ? <p>Already have an account? <Link to="/login">Log in</Link></p>
+              : <p>No account yet? <Link to="/register">Sign up</Link></p>
             }
           </div>
+
         </div>
       </div>
-      <MarketingPanel content={content.panel} />
+      <MarketingPanel content={panel} />
     </div>
   );
 }

@@ -24,20 +24,24 @@ router.get('/me', authenticate, async (req, res) => {
   }
 });
 
-// Google OAuth — redirect to Google
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'], session: false }));
+const oauthSuccess = (req, res) => {
+  const { token } = req.user;
+  const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+  res.redirect(`${clientUrl}/oauth-callback?token=${token}`);
+};
 
-// Google OAuth — callback
-router.get(
-  '/google/callback',
+// Google OAuth
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'], session: false }));
+router.get('/google/callback',
   passport.authenticate('google', { session: false, failureRedirect: '/login' }),
-  (req, res) => {
-    // req.user is { user, token } set by the Passport strategy
-    const { token } = req.user;
-    const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
-    // Send token back to the frontend via redirect with query param
-    res.redirect(`${clientUrl}/oauth-callback?token=${token}`);
-  }
+  oauthSuccess
+);
+
+// GitHub OAuth
+router.get('/github', passport.authenticate('github', { scope: ['user:email'], session: false }));
+router.get('/github/callback',
+  passport.authenticate('github', { session: false, failureRedirect: '/login' }),
+  oauthSuccess
 );
 
 module.exports = router;

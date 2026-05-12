@@ -21,6 +21,15 @@ const submitFeedback = async (req, res) => {
       return res.status(403).json({ error: 'You cannot submit feedback on your own pitch.' });
     }
 
+    // Block duplicate feedback
+    const existing = await pool.query(
+      'SELECT id FROM feedback WHERE pitch_id = $1 AND user_id = $2',
+      [pitch_id, req.user.id]
+    );
+    if (existing.rows.length > 0) {
+      return res.status(409).json({ error: 'You have already submitted feedback on this pitch.' });
+    }
+
     const result = await pool.query(
       `INSERT INTO feedback (pitch_id, user_id, what_i_like, would_change, would_use)
        VALUES ($1, $2, $3, $4, $5)

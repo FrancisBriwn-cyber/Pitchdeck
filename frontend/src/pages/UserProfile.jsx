@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Rocket, Wrench, Lightbulb, Hammer, TrendingUp, MessageSquare, Users, DollarSign, FlaskConical, Compass } from 'lucide-react';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import PitchCard from '../components/PitchCard';
@@ -8,19 +9,19 @@ const getInitials = (name = '') =>
   name.split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2);
 
 const STAGE_LABELS = {
-  idea: '💡 Just an Idea',
-  mvp: '🔨 Building MVP',
-  launched: '🚀 Launched',
-  traction: '📈 Early Traction',
+  idea:     { icon: <Lightbulb size={13} />, label: 'Just an Idea' },
+  mvp:      { icon: <Hammer size={13} />,    label: 'Building MVP' },
+  launched: { icon: <Rocket size={13} />,    label: 'Launched' },
+  traction: { icon: <TrendingUp size={13} />,label: 'Early Traction' },
 };
 
 const LOOKING_FOR_LABELS = {
-  feedback:  '💬 Honest feedback',
-  cofounder: '🤝 Co-founder',
-  investors: '💰 Investors / Angels',
-  builders:  '🔧 Builders to join',
-  beta:      '🧪 Beta testers',
-  mentors:   '🧭 Mentors / Advisors',
+  feedback:  { icon: <MessageSquare size={13} />, label: 'Honest feedback' },
+  cofounder: { icon: <Users size={13} />,         label: 'Co-founder' },
+  investors: { icon: <DollarSign size={13} />,    label: 'Investors / Angels' },
+  builders:  { icon: <Wrench size={13} />,        label: 'Builders to join' },
+  beta:      { icon: <FlaskConical size={13} />,  label: 'Beta testers' },
+  mentors:   { icon: <Compass size={13} />,       label: 'Mentors / Advisors' },
 };
 
 export default function UserProfile() {
@@ -63,15 +64,15 @@ export default function UserProfile() {
             {/* Info */}
             <div className="profile-header-info">
               <div className="profile-role-badge" data-role={role}>
-                {role === 'founder' ? '🚀 Founder' : '🔧 Builder'}
+                {role === 'founder' ? <><Rocket size={13} /> Founder</> : <><Wrench size={13} /> Builder</>}
               </div>
               <h1 className="profile-name">{user.name}</h1>
               <p className="profile-email">{user.email}</p>
               <div className="profile-meta-row">
                 {user.location && (
-                  <span className="profile-meta-chip">📍 {user.location}</span>
+                  <span className="profile-meta-chip">{user.location}</span>
                 )}
-                <span className="profile-meta-chip">🗓 Joined {joinDate}</span>
+                <span className="profile-meta-chip">Joined {joinDate}</span>
                 {user.linkedin_url && (
                   <a
                     href={user.linkedin_url}
@@ -131,15 +132,15 @@ export default function UserProfile() {
                 <div className="profile-tags">
                   {user.stage && (
                     <span className="profile-tag profile-tag-stage">
-                      {STAGE_LABELS[user.stage] || user.stage}
+                      {STAGE_LABELS[user.stage] ? <>{STAGE_LABELS[user.stage].icon} {STAGE_LABELS[user.stage].label}</> : user.stage}
                     </span>
                   )}
                   {user.industry && (
-                    <span className="profile-tag profile-tag-industry">🏭 {user.industry}</span>
+                    <span className="profile-tag profile-tag-industry">{user.industry}</span>
                   )}
                   {user.team_size && (
                     <span className="profile-tag">
-                      👥 {user.team_size === 'solo' ? 'Solo Founder' : `${user.team_size} people`}
+                      {user.team_size === 'solo' ? 'Solo Founder' : `${user.team_size} people`}
                     </span>
                   )}
                 </div>
@@ -152,7 +153,7 @@ export default function UserProfile() {
                 <div className="profile-tags">
                   {lookingForList.map((item) => (
                     <span key={item} className="profile-tag profile-tag-looking">
-                      {LOOKING_FOR_LABELS[item] || item}
+                      {LOOKING_FOR_LABELS[item] ? <>{LOOKING_FOR_LABELS[item].icon} {LOOKING_FOR_LABELS[item].label}</> : item}
                     </span>
                   ))}
                 </div>
@@ -169,7 +170,7 @@ export default function UserProfile() {
 
         {pitches.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-state-icon">📋</div>
+            <div className="empty-state-icon"></div>
             <h3>No pitches yet</h3>
             <p>
               {isOwn

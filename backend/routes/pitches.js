@@ -17,8 +17,19 @@ router.get('/', getAllPitches);
 router.get('/search', searchPitches);
 router.get('/:id', getPitchById);
 
-router.post('/', authenticate, pitchCreateLimiter, upload.single('cover_image'), createPitch);
-router.put('/:id', authenticate, upload.single('cover_image'), updatePitch);
+const handleUpload = (req, res, next) => {
+  upload.single('cover_image')(req, res, (err) => {
+    if (!err) return next();
+    if (err.code === 'LIMIT_FILE_SIZE')
+      return res.status(400).json({ error: 'Image is too large — max 5 MB.' });
+    if (err.message)
+      return res.status(400).json({ error: err.message });
+    next(err);
+  });
+};
+
+router.post('/', authenticate, pitchCreateLimiter, handleUpload, createPitch);
+router.put('/:id', authenticate, handleUpload, updatePitch);
 router.delete('/:id', authenticate, deletePitch);
 
 router.post('/:id/feedback', authenticate, feedbackLimiter, submitFeedback);

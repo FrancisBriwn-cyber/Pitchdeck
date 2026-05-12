@@ -34,7 +34,7 @@ function GuestLanding({ pitches, loading }) {
           </h1>
           <p className="guest-hero-sub">
             Founders post their startup pitches. Builders give structured, honest feedback.
-            Validate your idea before building — completely free.
+            Validate your idea before building completely free.
           </p>
 
           {/* Social proof */}
@@ -136,8 +136,8 @@ function GuestLanding({ pitches, loading }) {
             {/* Tall card */}
             <div className="guest-bento-card guest-bento-tall guest-bento-dark">
               <div className="guest-bento-tag guest-bento-tag-green">For Builders</div>
-              <h3 className="guest-bento-title">Discover the next big thing early</h3>
-              <p className="guest-bento-desc">Review startup pitches, leave honest feedback, and build a reputation in the community.</p>
+              <h3 className="guest-bento-title">See raw ideas before the world does</h3>
+              <p className="guest-bento-desc">Review early pitches, leave feedback that actually shapes the product, and build your reputation as someone whose opinion matters.</p>
               <div className="guest-bento-score">
                 <div className="gbs-bar">
                   <div className="gbs-fill" style={{ width: '78%' }} />
@@ -220,7 +220,7 @@ export default function Feed() {
   useEffect(() => {
     api.get('/api/pitches')
       .then((res) => setPitches(res.data))
-      .catch(() => setError('Failed to load pitches. Please try again.'))
+      .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
 
@@ -239,7 +239,7 @@ export default function Feed() {
           <div className="feed-hero-left">
             <span className="feed-hero-eyebrow">The Startup Idea Exchange</span>
             <h1>Where bold ideas meet<br />honest feedback.</h1>
-            <p>Browse startup pitches from founders worldwide. Share yours and get structured feedback from real builders.</p>
+            <p>Every pitch here is a problem someone is trying to solve. Browse, give feedback, or share your own idea.</p>
 
             <div className="feed-hero-ctas">
               <button
@@ -293,11 +293,11 @@ export default function Feed() {
                   <div className="hmc-footer">
                     <div className="hmc-avatar">AO</div>
                     <span className="hmc-author">Amara Osei</span>
-                    <span className="hmc-badge">💬 5 feedback</span>
+                    <span className="hmc-badge"><MessageSquare size={12} /> 5 feedback</span>
                   </div>
                 </div>
               </div>
-              <div className="hero-mockup-pill">🔥 Trending today</div>
+              <div className="hero-mockup-pill"><Flame size={13} /> Trending today</div>
             </div>
           </div>
 
@@ -322,7 +322,7 @@ export default function Feed() {
 
         {!loading && !error && pitches.length === 0 && (
           <div className="empty-state">
-            <div className="empty-state-icon">📋</div>
+            <div className="empty-state-icon"><ClipboardList size={36} /></div>
             <h3>No pitches yet</h3>
             <p>Be the first to share your startup idea with the community.</p>
           </div>

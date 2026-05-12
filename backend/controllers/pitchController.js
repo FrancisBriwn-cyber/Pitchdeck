@@ -98,14 +98,19 @@ const createPitch = async (req, res) => {
     return res.status(400).json({ error: 'All fields (name, one_liner, problem, solution, target_market) are required.' });
   }
 
-  try {
-    let cover_image_url = null;
+  let cover_image_url = null;
 
-    if (req.file) {
+  if (req.file) {
+    try {
       const uploaded = await uploadToCloudinary(req.file.buffer);
       cover_image_url = uploaded.secure_url;
+    } catch (uploadErr) {
+      console.error('Cloudinary error:', uploadErr);
+      return res.status(502).json({ error: 'Image upload failed. Try a smaller file or a different format.' });
     }
+  }
 
+  try {
     const result = await pool.query(
       `INSERT INTO pitches (user_id, name, one_liner, problem, solution, target_market, cover_image_url)
        VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -116,7 +121,7 @@ const createPitch = async (req, res) => {
     res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error('Create pitch error:', err);
-    res.status(500).json({ error: 'Failed to create pitch.' });
+    res.status(500).json({ error: 'Failed to save pitch. Please try again.' });
   }
 };
 

@@ -66,8 +66,8 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <Link to="/join" className="btn btn-outline">Log in</Link>
-              <Link to="/join" className="btn btn-primary btn-cta">Sign up</Link>
+              <Link to="/login" className="btn btn-outline">Log in</Link>
+              <Link to="/register" className="btn btn-primary btn-cta">Sign up</Link>
             </>
           )}
         </div>
@@ -107,7 +107,7 @@ export default function Navbar() {
               <>
                 <a href="/#pitches" onClick={() => setMobileOpen(false)}>Browse Pitches</a>
                 <a href="/#how-it-works" onClick={() => setMobileOpen(false)}>How it works</a>
-                <Link to="/join" onClick={() => setMobileOpen(false)}>Log in</Link>
+                <Link to="/login" onClick={() => setMobileOpen(false)}>Log in</Link>
               </>
             )}
           </div>

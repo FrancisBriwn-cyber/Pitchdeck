@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Search as SearchIcon } from 'lucide-react';
 import api from '../api/axios';
 import PitchCard from '../components/PitchCard';
 
@@ -41,7 +42,7 @@ export default function Search() {
 
         {!loading && pitches.length === 0 && (
           <div className="empty-state">
-            <div className="empty-state-icon">🔍</div>
+            <div className="empty-state-icon"><SearchIcon size={36} /></div>
             <h3>No pitches found for &quot;{q}&quot;</h3>
             <p>Try a different keyword — search works across pitch names, one-liners, problems, and solutions.</p>
           </div>

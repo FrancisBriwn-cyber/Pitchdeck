@@ -32,7 +32,7 @@ export default function EditPitch() {
       await api.put(`/api/pitches/${id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
       navigate(`/pitches/${id}`);
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to update pitch.');
+      setError(err.message);
     }
   };
 

@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Image } from 'lucide-react';
 import api from '../api/axios';
 
 export default function CreatePitch() {
@@ -18,7 +19,10 @@ export default function CreatePitch() {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const applyFile = (file) => {
-    if (!file || !file.type.startsWith('image/')) return;
+    if (!file) return;
+    if (!file.type.startsWith('image/')) { setError('Only image files are allowed (PNG, JPG, WEBP).'); return; }
+    if (file.size > 5 * 1024 * 1024) { setError('Image is too large — max 5 MB.'); return; }
+    setError('');
     setImage(file);
     setPreview(URL.createObjectURL(file));
   };
@@ -49,7 +53,7 @@ export default function CreatePitch() {
       });
       navigate(`/pitches/${res.data.id}`);
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to create pitch.');
+      setError(err.message);
     } finally { setLoading(false); }
   };
 
@@ -81,7 +85,7 @@ export default function CreatePitch() {
                 onDragLeave={() => setDragging(false)}
                 onDrop={handleDrop}
               >
-                <span className="pitch-upload-icon">🖼️</span>
+                <span className="pitch-upload-icon"><Image size={28} /></span>
                 <span className="pitch-upload-text">Drop an image here or <u>click to browse</u></span>
                 <span className="pitch-upload-hint">PNG, JPG, WEBP · max 5 MB</span>
               </div>

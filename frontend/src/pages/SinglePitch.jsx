@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { MessageSquare, ThumbsUp, Flame, Lightbulb, Target, Wrench, Rocket, Link2 } from 'lucide-react';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 
@@ -45,7 +46,7 @@ export default function SinglePitch() {
       setFeedback({ what_i_like: '', would_change: '', would_use: true });
       fetchPitch();
     } catch (err) {
-      setFbError(err.response?.data?.error || 'Failed to submit feedback.');
+      setFbError(err.message);
     } finally { setSubmitting(false); }
   };
 
@@ -88,9 +89,9 @@ export default function SinglePitch() {
               </div>
             </div>
             <div className="sp-hero-badges">
-              <span className="sp-badge">💬 {pitch.feedback.length} feedback</span>
+              <span className="sp-badge"><MessageSquare size={13} /> {pitch.feedback.length} feedback</span>
               {wouldUsePct !== null && (
-                <span className="sp-badge sp-badge-green">👍 {wouldUsePct}% would use</span>
+                <span className="sp-badge sp-badge-green"><ThumbsUp size={13} /> {wouldUsePct}% would use</span>
               )}
             </div>
           </div>
@@ -118,15 +119,15 @@ export default function SinglePitch() {
             {/* Pitch sections */}
             <div className="sp-sections">
               <div className="sp-section">
-                <div className="sp-section-label">🔥 The Problem</div>
+                <div className="sp-section-label"><Flame size={14} /> The Problem</div>
                 <p className="sp-section-text">{pitch.problem}</p>
               </div>
               <div className="sp-section">
-                <div className="sp-section-label">💡 The Solution</div>
+                <div className="sp-section-label"><Lightbulb size={14} /> The Solution</div>
                 <p className="sp-section-text">{pitch.solution}</p>
               </div>
               <div className="sp-section">
-                <div className="sp-section-label">🎯 Target Market</div>
+                <div className="sp-section-label"><Target size={14} /> Target Market</div>
                 <p className="sp-section-text">{pitch.target_market}</p>
               </div>
             </div>
@@ -140,7 +141,7 @@ export default function SinglePitch() {
 
               {pitch.feedback.length === 0 ? (
                 <div className="sp-empty-feedback">
-                  <span style={{ fontSize: '2rem' }}>💬</span>
+                  <MessageSquare size={32} />
                   <p>No feedback yet — be the first to share your thoughts.</p>
                 </div>
               ) : (
@@ -161,11 +162,11 @@ export default function SinglePitch() {
                       </div>
                       <div className="sp-feedback-row">
                         <div className="sp-feedback-col">
-                          <div className="sp-feedback-col-label">👍 What I like</div>
+                          <div className="sp-feedback-col-label"><ThumbsUp size={13} /> What I like</div>
                           <p className="sp-feedback-col-text">{f.what_i_like}</p>
                         </div>
                         <div className="sp-feedback-col">
-                          <div className="sp-feedback-col-label">🔧 Would change</div>
+                          <div className="sp-feedback-col-label"><Wrench size={13} /> Would change</div>
                           <p className="sp-feedback-col-text">{f.would_change}</p>
                         </div>
                       </div>
@@ -177,14 +178,14 @@ export default function SinglePitch() {
               {/* Feedback form */}
               {!user && (
                 <div className="sp-feedback-gate">
-                  <span>💬</span>
+                  <MessageSquare size={24} />
                   <p>Log in to leave feedback on this pitch.</p>
                   <Link to="/join" className="btn btn-primary">Log in / Sign up</Link>
                 </div>
               )}
               {user && isOwner && (
                 <div className="sp-feedback-gate" style={{ background: '#f9f9f9' }}>
-                  <span>🚀</span>
+                  <Rocket size={24} />
                   <p style={{ color: 'var(--ink-muted)' }}>This is your pitch — you can't review your own idea.</p>
                 </div>
               )}
@@ -247,14 +248,14 @@ export default function SinglePitch() {
             <div className="sp-sidebar-card">
               <div className="sp-sidebar-label">Pitch Stats</div>
               <div className="sp-stat-row">
-                <span className="sp-stat-icon">💬</span>
+                <span className="sp-stat-icon"><MessageSquare size={15} /></span>
                 <span className="sp-stat-value">{pitch.feedback.length}</span>
                 <span className="sp-stat-name">Responses</span>
               </div>
               {wouldUsePct !== null && (
                 <>
                   <div className="sp-stat-row">
-                    <span className="sp-stat-icon">👍</span>
+                    <span className="sp-stat-icon"><ThumbsUp size={15} /></span>
                     <span className="sp-stat-value">{wouldUsePct}%</span>
                     <span className="sp-stat-name">Would use it</span>
                   </div>
@@ -273,7 +274,7 @@ export default function SinglePitch() {
                 style={{ width: '100%', justifyContent: 'center' }}
                 onClick={() => navigator.clipboard.writeText(window.location.href)}
               >
-                🔗 Copy Link
+                <Link2 size={14} /> Copy Link
               </button>
             </div>
           </aside>
