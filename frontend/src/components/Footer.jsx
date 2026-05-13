@@ -56,10 +56,7 @@ export default function Footer() {
             <span>© {year} PitchDeck.</span>
             <span className="footer-bottom-stats">20+ pitches · 100+ feedback · Always free</span>
           </div>
-          <span className="footer-built">
-            Final Project · Full Stack Web Development ·{' '}
-            <strong style={{ color: 'var(--green-mid)', fontWeight: 700 }}>Francis Ani</strong>
-          </span>
+          <span className="footer-built">Built with care</span>
         </div>
       </div>
 
