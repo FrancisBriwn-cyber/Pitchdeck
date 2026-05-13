@@ -416,9 +416,9 @@ img { display: block; max-width: 100%; }
   flex-direction: column;
   align-items: center;
   padding: 0.8rem 1.25rem;
-  border: 1px solid rgba(255,255,255,.1);
+  border: 1px solid #e0ddd9;
   border-radius: 12px;
-  background: rgba(255,255,255,.04);
+  background: #ffffff;
   min-width: 90px;
   gap: 0.15rem;
 }
@@ -430,7 +430,7 @@ img { display: block; max-width: 100%; }
   font-family: var(--serif);
   font-size: 1.65rem;
   font-weight: 800;
-  color: var(--cream);
+  color: var(--ink);
   line-height: 1;
 }
 .hero-stat-card-accent .hero-stat-number { color: var(--green-mid); }
@@ -439,7 +439,7 @@ img { display: block; max-width: 100%; }
   font-weight: 700;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: #666;
+  color: var(--ink-muted);
 }
 
 /* ── Right column: floating mockup ── */
@@ -1172,10 +1172,10 @@ img { display: block; max-width: 100%; }
 }
 
 .pitch-card {
-  background: #161616;
+  background: #ffffff;
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid #242424;
+  border: 1px solid #e0ddd9;
   box-shadow: 0 2px 12px rgba(0,0,0,.35);
   transition: transform 0.22s ease, box-shadow 0.22s ease;
   animation: cardEnter 0.4s ease backwards;
@@ -1247,11 +1247,11 @@ img { display: block; max-width: 100%; }
   font-weight: 700;
   line-height: 1.25;
   margin-bottom: 0.5rem;
-  color: #f0ece7;
+  color: var(--ink);
 }
 .pitch-card-oneliner {
   font-size: 0.87rem;
-  color: #777;
+  color: var(--ink-muted);
   line-height: 1.55;
   flex: 1;
   margin-bottom: 1rem;
@@ -1261,7 +1261,7 @@ img { display: block; max-width: 100%; }
   align-items: center;
   justify-content: space-between;
   padding-top: 0.75rem;
-  border-top: 1px solid #222;
+  border-top: 1px solid var(--border);
 }
 .pitch-card-author {
   display: flex;
@@ -1269,14 +1269,14 @@ img { display: block; max-width: 100%; }
   gap: 0.5rem;
 }
 
-/* author-avatar is shared; scoped overrides for dark cards */
+/* author-avatar is shared; scoped overrides for pitch cards */
 .pitch-card .author-avatar {
-  background: #2a2a2a;
-  color: #ccc;
-  border: 1px solid #333;
+  background: var(--green);
+  color: #fff;
+  border: none;
 }
-.pitch-card .author-name { color: #bbb; }
-.pitch-card .author-date { color: #555; }
+.pitch-card .author-name { color: var(--ink-light); }
+.pitch-card .author-date { color: var(--ink-muted); }
 
 /* shared author styles (used elsewhere on light bg) */
 .author-avatar {
@@ -1300,9 +1300,9 @@ img { display: block; max-width: 100%; }
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  background: rgba(255,255,255,.06);
-  color: #888;
-  border: 1px solid #2a2a2a;
+  background: rgba(0,0,0,.05);
+  color: var(--ink-muted);
+  border: 1px solid var(--border);
   border-radius: 999px;
   padding: 0.2rem 0.6rem;
   font-size: 0.72rem;
