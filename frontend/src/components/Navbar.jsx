@@ -44,17 +44,10 @@ export default function Navbar() {
         {user && (
           <>
             <div className="navbar-divider" />
-            <div className="navbar-search">
-              <form onSubmit={handleSearch} className="navbar-search-pill">
-                <SearchIcon />
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search pitches, ideas, markets..."
-                />
-                <button type="submit" className="navbar-search-btn">Search</button>
-              </form>
-            </div>
+            <Link to="/search" className="navbar-search-btn-simple" aria-label="Search">
+              <SearchIcon />
+              <span>Search</span>
+            </Link>
           </>
         )}
 

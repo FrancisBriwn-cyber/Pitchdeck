@@ -92,7 +92,8 @@ img { display: block; max-width: 100%; }
   flex-shrink: 0;
 }
 /* Pill search */
-.navbar-search { margin-left: auto; max-width: 360px; }
+
+
 .navbar-search-pill {
   display: flex;
   align-items: center;
