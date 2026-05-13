@@ -2658,7 +2658,7 @@ img { display: block; max-width: 100%; }
    ══════════════════════════════════════════════════════════════════════════ */
 
 /* Navbar */
-[data-theme="light"] .navbar { background: #ffffff; box-shadow: 0 1px 0 #e8e2da; }
+[data-theme="light"] .navbar { background: var(--green-light); box-shadow: 0 1px 0 #e8e2da; }
 [data-theme="light"] .navbar::after { display: none; }
 [data-theme="light"] .navbar-brand { color: var(--ink); }
 [data-theme="light"] .navbar-brand span { color: var(--green-mid); }
@@ -2668,7 +2668,7 @@ img { display: block; max-width: 100%; }
 [data-theme="light"] .navbar-search-pill input { color: var(--ink); }
 [data-theme="light"] .navbar-search-pill input::placeholder { color: #999; }
 [data-theme="light"] .navbar-hamburger span { background: var(--ink); }
-[data-theme="light"] .navbar-mobile-menu { background: #ffffff; border-color: var(--border); }
+[data-theme="light"] .navbar-mobile-menu { background: var(--green-light); border-color: var(--border); }
 [data-theme="light"] .navbar-mobile-links a,
 [data-theme="light"] .navbar-mobile-links button { color: var(--ink); border-color: var(--border); }
 [data-theme="light"] .theme-toggle { border-color: var(--border); color: var(--ink); }
@@ -2688,7 +2688,7 @@ img { display: block; max-width: 100%; }
 [data-theme="light"] .hero-stat-card-accent { background: rgba(6,95,70,0.08); border-color: rgba(6,95,70,0.25); }
 [data-theme="light"] .hero-stat-card-accent .hero-stat-number { color: var(--green) !important; }
 [data-theme="light"] .hero-mockup-card-back,
-[data-theme="light"] .hero-mockup-card-front { background: #ffffff; border-color: var(--border); box-shadow: var(--shadow-md); }
+[data-theme="light"] .hero-mockup-card-front { background: var(--green-light); border-color: var(--border); box-shadow: var(--shadow-md); }
 [data-theme="light"] .hmc-tag,
 [data-theme="light"] .hmc-meta { color: var(--ink-muted); }
 [data-theme="light"] .hmc-title { color: var(--ink); }
@@ -2696,7 +2696,7 @@ img { display: block; max-width: 100%; }
 [data-theme="light"] .hero-mockup-pill { background: rgba(0,0,0,0.07); color: var(--ink-light); }
 
 /* Pitch cards */
-[data-theme="light"] .pitch-card { background: #ffffff; border-color: #e8e2da; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+[data-theme="light"] .pitch-card { background: var(--green-light); border-color: #e8e2da; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
 [data-theme="light"] .pitch-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,.12), 0 0 0 1px rgba(6,95,70,.2); }
 [data-theme="light"] .pitch-card-industry { color: var(--green); background: rgba(6,95,70,0.08); }
 [data-theme="light"] .pitch-card-title { color: var(--ink); }
@@ -2708,17 +2708,37 @@ img { display: block; max-width: 100%; }
 [data-theme="light"] .would-use-badge { background: rgba(0,0,0,.05); color: var(--ink-light); border-color: transparent; }
 
 /* Guest landing — light mode */
-[data-theme="light"] .guest-how { background: #ffffff; }
+[data-theme="light"] .guest-how { background: var(--green-light); }
 [data-theme="light"] .guest-how .guest-steps-title { color: var(--ink); }
 [data-theme="light"] .guest-how .guest-step-desc { color: var(--ink-muted); }
 [data-theme="light"] .guest-bento-section { background: var(--cream); }
-[data-theme="light"] .guest-bento-card { background: #ffffff; border-color: var(--border); }
+[data-theme="light"] .guest-bento-card { background: var(--green-light); border-color: var(--border); }
 [data-theme="light"] .guest-bento-card .guest-bento-title { color: var(--ink); }
 [data-theme="light"] .guest-bento-card .guest-bento-desc  { color: var(--ink-muted); }
 [data-theme="light"] .guest-bento-card .guest-bento-tag   { color: var(--ink-muted); border-color: var(--border); }
 [data-theme="light"] .guest-bento-visual .gbv-field { background: var(--cream); color: var(--ink-light); border-color: var(--border); }
 [data-theme="light"] .guest-step-example { background: #f3ede5; color: var(--ink-muted); border-color: var(--border); }
 [data-theme="light"] .guest-section-label { color: var(--green); }
+
+/* White fields and surfaces → green-light in light mode */
+[data-theme="light"] .form-card,
+[data-theme="light"] .profile-about-card,
+[data-theme="light"] .auth-split-form,
+[data-theme="light"] .auth-role-tab-active,
+[data-theme="light"] .role-card,
+[data-theme="light"] .sp-sections,
+[data-theme="light"] .sp-empty-feedback,
+[data-theme="light"] .sp-feedback-card,
+[data-theme="light"] .sp-feedback-form,
+[data-theme="light"] .sp-sidebar-card,
+[data-theme="light"] .stage-card,
+[data-theme="light"] .pill-option,
+[data-theme="light"] .hero-mockup-card,
+[data-theme="light"] .guest-step-icon-wrap { background: var(--green-light); }
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group textarea,
+[data-theme="light"] .form-group select { background-color: var(--green-light); }
+[data-theme="light"] .btn-google { background: var(--green-light); }
 
 /* ── Large desktop (≥ 1400px) ──────────────────────────────────────────── */
 @media (min-width: 1400px) {
