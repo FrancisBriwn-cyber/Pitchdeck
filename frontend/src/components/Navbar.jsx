@@ -91,9 +91,6 @@ export default function Navbar() {
         )}
 
         <div className="navbar-links">
-          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
-          </button>
           {user ? (
             <>
               <Link to="/pitches/new" className="btn btn-primary btn-cta">+ New Pitch</Link>
@@ -109,6 +106,11 @@ export default function Navbar() {
             </>
           )}
         </div>
+
+        {/* Theme toggle — always visible */}
+        <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+          {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+        </button>
 
         {/* Hamburger toggle */}
         <button
