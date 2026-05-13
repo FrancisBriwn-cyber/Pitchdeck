@@ -833,12 +833,11 @@ img { display: block; max-width: 100%; }
 }
 .guest-step-circle-mid { background: rgba(5,150,105,.15); border-color: var(--green-mid); }
 .guest-step-circle-end { background: rgba(5,150,105,.15); border-color: var(--green-mid); }
-.guest-step-num { color: var(--green-mid); }
 .guest-step-num {
   font-family: var(--serif);
   font-size: 0.9rem;
   font-weight: 900;
-  color: var(--cream);
+  color: var(--green);
 }
 .guest-step-line {
   display: none;
