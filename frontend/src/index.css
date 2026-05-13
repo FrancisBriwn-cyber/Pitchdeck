@@ -1386,7 +1386,7 @@ img { display: block; max-width: 100%; }
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 0.65rem 0.9rem;
+  padding: 0.65rem 2.5rem 0.65rem 0.9rem;
   border: 1.5px solid var(--border);
   border-radius: var(--radius);
   font-size: 0.95rem;
@@ -1394,6 +1394,7 @@ img { display: block; max-width: 100%; }
   color: var(--ink);
   background: var(--white);
   transition: border-color 0.15s;
+  appearance: auto;
 }
 .form-group input:focus,
 .form-group textarea:focus,
