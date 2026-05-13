@@ -2588,9 +2588,11 @@ img { display: block; max-width: 100%; }
 [data-theme="light"] .feed-hero { background: var(--cream-dark); color: var(--ink); border-bottom-color: var(--green-light); }
 [data-theme="light"] .feed-hero-left h1 { color: var(--ink); }
 [data-theme="light"] .feed-hero-left p { color: var(--ink-light); }
-[data-theme="light"] .hero-stat-card { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); }
-[data-theme="light"] .hero-stat-number { color: var(--ink); }
+[data-theme="light"] .hero-stat-card { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.12); }
+[data-theme="light"] .hero-stat-number { color: var(--ink) !important; }
+[data-theme="light"] .hero-stat-label { color: var(--ink-muted) !important; }
 [data-theme="light"] .hero-stat-card-accent { background: rgba(6,95,70,0.08); border-color: rgba(6,95,70,0.25); }
+[data-theme="light"] .hero-stat-card-accent .hero-stat-number { color: var(--green) !important; }
 [data-theme="light"] .hero-mockup-card-back,
 [data-theme="light"] .hero-mockup-card-front { background: #ffffff; border-color: var(--border); box-shadow: var(--shadow-md); }
 [data-theme="light"] .hmc-tag,
