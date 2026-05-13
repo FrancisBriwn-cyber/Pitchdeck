@@ -5,6 +5,20 @@ export default function Footer() {
   const { user } = useAuth();
   const year = new Date().getFullYear();
 
+  if (user) {
+    return (
+      <footer className="footer footer-auth">
+        <div className="container footer-auth-inner">
+          <Link to="/" className="footer-logo">Pitch<span>Deck</span></Link>
+          <span className="footer-auth-copy">© {year} PitchDeck · Always free</span>
+          <Link to="/pitches/new" className="btn btn-primary footer-cta-btn" style={{ padding: '0.5rem 1.1rem', fontSize: '0.85rem' }}>
+            + New Pitch
+          </Link>
+        </div>
+      </footer>
+    );
+  }
+
   return (
     <footer className="footer">
 

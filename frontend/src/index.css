@@ -835,6 +835,36 @@ img { display: block; max-width: 100%; }
 }
 
 /* ── Bento feature grid ── */
+/* ── Who is it for ── */
+.guest-for { padding: 5rem 0; background: var(--cream); }
+.guest-for-title {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 900;
+  color: var(--ink);
+  margin-bottom: 2.5rem;
+  margin-top: 0.5rem;
+}
+.guest-for-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.guest-for-card {
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.guest-for-founder { background: var(--ink); color: var(--cream); }
+.guest-for-builder { background: var(--green); color: #fff; }
+.guest-for-icon { opacity: 0.85; }
+.guest-for-card h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 900; }
+.guest-for-card p { font-size: 0.92rem; line-height: 1.65; opacity: 0.8; }
+.guest-for-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+.guest-for-list li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; opacity: 0.9; }
+.guest-for-btn { margin-top: 0.5rem; align-self: flex-start; }
+.guest-for-builder .btn-outline { border-color: rgba(255,255,255,0.5); color: #fff; }
+.guest-for-builder .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+@media (max-width: 640px) { .guest-for-grid { grid-template-columns: 1fr; } }
+
 .guest-bento-section {
   padding: 5rem 0;
   background: var(--cream-dark);
@@ -1787,6 +1817,20 @@ img { display: block; max-width: 100%; }
   position: relative;
   overflow: hidden;
 }
+/* Auth (logged-in) minimal footer */
+.footer-auth {
+  background: #0f0f0f;
+  border-top: 1px solid #1f1f1f;
+  padding: 1.25rem 0;
+}
+.footer-auth-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.footer-auth-copy { font-size: 0.8rem; color: #555; }
+
 .footer::before {
   content: '';
   position: absolute;

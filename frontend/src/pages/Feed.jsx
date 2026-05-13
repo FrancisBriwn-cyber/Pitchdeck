@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   TrendingUp, Leaf, Cpu, Heart, Car, GraduationCap,
   ClipboardList, MessageSquare, Target,
-  Flame, Lightbulb, Lock, Globe,
+  Flame, Lightbulb, Lock, Globe, Rocket, Wrench, CheckCircle,
 } from 'lucide-react';
 import api from '../api/axios';
 import PitchCard from '../components/PitchCard';
@@ -83,6 +83,41 @@ function GuestLanding({ pitches, loading }) {
             Already have an account?{' '}
             <Link to="/join" className="guest-login-link">Log in</Link>
           </p>
+        </div>
+      </section>
+
+      {/* ── Who is it for ── */}
+      <section className="guest-for">
+        <div className="container">
+          <span className="guest-section-label">Who is it for?</span>
+          <h2 className="guest-for-title">Two sides. One platform.</h2>
+          <div className="guest-for-grid">
+
+            <div className="guest-for-card guest-for-founder">
+              <div className="guest-for-icon"><Rocket size={26} /></div>
+              <h3>Founders with an idea</h3>
+              <p>You have a startup concept but haven't validated it yet. Post your pitch and hear the hard truth before you spend months building the wrong thing.</p>
+              <ul className="guest-for-list">
+                <li><CheckCircle size={14} /> Get honest, structured critique</li>
+                <li><CheckCircle size={14} /> See your idea's approval score</li>
+                <li><CheckCircle size={14} /> Find co-founders and early users</li>
+              </ul>
+              <Link to="/founder/register" className="btn btn-primary guest-for-btn">Join as Founder →</Link>
+            </div>
+
+            <div className="guest-for-card guest-for-builder">
+              <div className="guest-for-icon"><Wrench size={26} /></div>
+              <h3>Builders who love ideas</h3>
+              <p>You're a developer, designer, or product thinker who enjoys evaluating early-stage ideas. Give the kind of feedback that actually shapes what gets built.</p>
+              <ul className="guest-for-list">
+                <li><CheckCircle size={14} /> Discover problems worth solving</li>
+                <li><CheckCircle size={14} /> Build your reputation as an expert</li>
+                <li><CheckCircle size={14} /> Connect with ambitious founders</li>
+              </ul>
+              <Link to="/register" className="btn btn-outline guest-for-btn">Join as Builder →</Link>
+            </div>
+
+          </div>
         </div>
       </section>
 
