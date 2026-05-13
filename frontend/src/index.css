@@ -1232,9 +1232,9 @@ img { display: block; max-width: 100%; }
   font-weight: 800;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  color: var(--green-mid);
-  background: rgba(5,150,105,.12);
-  border: 1px solid rgba(5,150,105,.25);
+  color: var(--green);
+  background: rgba(6,95,70,.1);
+  border: 1px solid rgba(6,95,70,.2);
   border-radius: 999px;
   padding: 0.2rem 0.65rem;
   margin-bottom: 0.7rem;
@@ -1312,9 +1312,9 @@ img { display: block; max-width: 100%; }
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  background: rgba(5,150,105,.12);
-  color: var(--green-mid);
-  border: 1px solid rgba(5,150,105,.25);
+  background: rgba(6,95,70,.1);
+  color: var(--green);
+  border: 1px solid rgba(6,95,70,.2);
   border-radius: 999px;
   padding: 0.2rem 0.6rem;
   font-size: 0.72rem;
