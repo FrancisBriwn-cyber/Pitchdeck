@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Sun, Moon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
@@ -16,12 +16,28 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [query, setQuery] = useState('');
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const searchRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!searchOpen) return;
+    const handler = (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setSearchOpen(false);
+        setQuery('');
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [searchOpen]);
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim()) {
       navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+      setSearchOpen(false);
+      setQuery('');
       setMobileOpen(false);
     }
   };
@@ -44,10 +60,26 @@ export default function Navbar() {
         {user && (
           <>
             <div className="navbar-divider" />
-            <Link to="/search" className="navbar-search-btn-simple" aria-label="Search">
-              <SearchIcon />
-              <span>Search</span>
-            </Link>
+            <div className="navbar-search-wrap" ref={searchRef}>
+              {searchOpen ? (
+                <form onSubmit={handleSearch} className="navbar-search-pill">
+                  <SearchIcon />
+                  <input
+                    autoFocus
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search pitches..."
+                    onKeyDown={(e) => { if (e.key === 'Escape') { setSearchOpen(false); setQuery(''); } }}
+                  />
+                  <button type="submit" className="navbar-search-btn">Search</button>
+                </form>
+              ) : (
+                <button className="navbar-search-toggle" onClick={() => setSearchOpen(true)} aria-label="Open search">
+                  <SearchIcon />
+                  <span>Search</span>
+                </button>
+              )}
+            </div>
           </>
         )}
 

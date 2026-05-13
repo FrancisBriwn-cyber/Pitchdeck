@@ -93,6 +93,28 @@ img { display: block; max-width: 100%; }
 }
 /* Pill search */
 
+.navbar-search-wrap {
+  display: flex;
+  align-items: center;
+}
+.navbar-search-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  color: #aaa;
+  font-size: 0.85rem;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.navbar-search-toggle:hover { border-color: var(--green-mid); color: var(--cream); }
+[data-theme="light"] .navbar-search-toggle { background: #f3ede5; border-color: var(--border); color: #666; }
+[data-theme="light"] .navbar-search-toggle:hover { color: var(--ink); border-color: var(--green); }
 
 .navbar-search-pill {
   display: flex;
