@@ -777,7 +777,7 @@ img { display: block; max-width: 100%; }
   padding: 5.5rem 0 4rem;
   background: var(--cream);
 }
-.guest-steps-header { margin-bottom: 3.5rem; }
+.guest-steps-header { margin-bottom: 3.5rem; text-align: center; }
 .guest-steps-title {
   font-family: var(--serif);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
@@ -790,7 +790,7 @@ img { display: block; max-width: 100%; }
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
 }
-.guest-step { padding-right: 2.5rem; }
+.guest-step { padding-right: 2.5rem; text-align: center; }
 .guest-step-last { padding-right: 0; }
 .guest-step-top {
   display: flex;
@@ -824,7 +824,7 @@ img { display: block; max-width: 100%; }
 }
 .guest-step-icon-wrap {
   font-size: 1.75rem;
-  margin-bottom: 0.75rem;
+  margin: 0 auto 0.75rem;
   width: 48px; height: 48px;
   background: var(--white);
   border: 1px solid var(--border);
