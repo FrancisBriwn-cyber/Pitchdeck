@@ -104,7 +104,7 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <Link to="/login" className="btn btn-outline">Log in</Link>
+              <Link to="/login" className="btn btn-primary">Log in</Link>
               <Link to="/register" className="btn btn-primary btn-cta">Sign up</Link>
             </>
           )}

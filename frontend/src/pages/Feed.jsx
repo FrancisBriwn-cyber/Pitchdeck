@@ -305,7 +305,7 @@ export default function Feed() {
               >
                 Browse Pitches ↓
               </button>
-              <Link to="/pitches/new" className="btn btn-outline btn-lg">
+              <Link to="/pitches/new" className="btn btn-primary btn-lg">
                 Share Your Idea →
               </Link>
             </div>
