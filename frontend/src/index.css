@@ -791,15 +791,26 @@ img { display: block; max-width: 100%; }
   gap: 0;
   position: relative;
 }
-/* Single dashed line connecting centres of all three circles */
+/* Segment 1: right edge of circle 1 → left edge of circle 2 */
 .guest-steps::before {
   content: '';
   position: absolute;
   top: 20px;
-  left: calc(100% / 6);
-  right: calc(100% / 6);
+  left: calc(100% / 6 + 24px);
+  right: calc(50% + 24px);
   height: 0;
-  border-top: 1px dashed rgba(6,95,70,.3);
+  border-top: 1px dashed rgba(0,0,0,0.35);
+  z-index: 0;
+}
+/* Segment 2: right edge of circle 2 → left edge of circle 3 */
+.guest-steps::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: calc(50% + 24px);
+  right: calc(100% / 6 + 24px);
+  height: 0;
+  border-top: 1px dashed rgba(0,0,0,0.35);
   z-index: 0;
 }
 .guest-step { padding-right: 2.5rem; text-align: center; }
