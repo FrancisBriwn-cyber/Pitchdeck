@@ -2582,6 +2582,10 @@ img { display: block; max-width: 100%; }
 [data-theme="light"] .navbar-mobile-links a,
 [data-theme="light"] .navbar-mobile-links button { color: var(--ink); border-color: var(--border); }
 [data-theme="light"] .theme-toggle { border-color: var(--border); color: var(--ink); }
+[data-theme="light"] .guest-step-circle,
+[data-theme="light"] .guest-step-circle-mid,
+[data-theme="light"] .guest-step-circle-end { background: var(--green); border-color: var(--green); }
+[data-theme="light"] .guest-step-num { color: #ffffff !important; }
 [data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.05); border-color: #ccc; }
 
 /* Feed hero */
