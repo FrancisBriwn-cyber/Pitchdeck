@@ -2534,8 +2534,8 @@ img { display: block; max-width: 100%; }
 
   /* Navbar */
   .navbar-audience, .navbar-divider, .navbar-search, .navbar-search-wrap, .navbar-links { display: none; }
-  .navbar-hamburger { display: flex; }
-  .theme-toggle { display: flex; }
+  .navbar-hamburger { display: flex; margin-left: 0; }
+  .theme-toggle { display: flex; margin-left: auto; }
 
   /* Hero */
   .feed-hero { padding: 3rem 0 2.5rem; }
