@@ -1859,7 +1859,7 @@ img { display: block; max-width: 100%; }
 .footer {
   background: #0f0f0f;
   color: var(--cream);
-  margin-top: 2rem;
+  margin-top: 0;
   position: relative;
   overflow: hidden;
 }
@@ -2706,6 +2706,19 @@ img { display: block; max-width: 100%; }
 [data-theme="light"] .author-date { color: var(--ink-muted); }
 [data-theme="light"] .feedback-badge,
 [data-theme="light"] .would-use-badge { background: rgba(0,0,0,.05); color: var(--ink-light); border-color: transparent; }
+
+/* Guest landing — light mode */
+[data-theme="light"] .guest-how { background: #ffffff; }
+[data-theme="light"] .guest-how .guest-steps-title { color: var(--ink); }
+[data-theme="light"] .guest-how .guest-step-desc { color: var(--ink-muted); }
+[data-theme="light"] .guest-bento-section { background: var(--cream); }
+[data-theme="light"] .guest-bento-card { background: #ffffff; border-color: var(--border); }
+[data-theme="light"] .guest-bento-card .guest-bento-title { color: var(--ink); }
+[data-theme="light"] .guest-bento-card .guest-bento-desc  { color: var(--ink-muted); }
+[data-theme="light"] .guest-bento-card .guest-bento-tag   { color: var(--ink-muted); border-color: var(--border); }
+[data-theme="light"] .guest-bento-visual .gbv-field { background: var(--cream); color: var(--ink-light); border-color: var(--border); }
+[data-theme="light"] .guest-step-example { background: #f3ede5; color: var(--ink-muted); border-color: var(--border); }
+[data-theme="light"] .guest-section-label { color: var(--green); }
 
 /* ── Large desktop (≥ 1400px) ──────────────────────────────────────────── */
 @media (min-width: 1400px) {

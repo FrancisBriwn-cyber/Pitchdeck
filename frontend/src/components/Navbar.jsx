@@ -20,6 +20,13 @@ export default function Navbar() {
   const searchRef = useRef(null);
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    if (window.confirm('Are you sure you want to log out?')) {
+      logout();
+      navigate('/');
+    }
+  };
+
   useEffect(() => {
     if (!searchOpen) return;
     const handler = (e) => {
@@ -93,7 +100,7 @@ export default function Navbar() {
               <Link to={`/users/${user.id}`} className="navbar-avatar" title={user.name}>
                 {user.name ? user.name.split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2) : '?'}
               </Link>
-              <button className="btn btn-outline" onClick={() => { logout(); navigate('/'); }}>Logout</button>
+              <button className="btn btn-outline" onClick={handleLogout}>Logout</button>
             </>
           ) : (
             <>
@@ -132,7 +139,7 @@ export default function Navbar() {
               <>
                 <Link to="/pitches/new" onClick={() => setMobileOpen(false)}>+ New Pitch</Link>
                 <Link to={`/users/${user.id}`} onClick={() => setMobileOpen(false)}>My Profile</Link>
-                <button onClick={() => { logout(); setMobileOpen(false); navigate('/'); }}>Logout</button>
+                <button onClick={() => { setMobileOpen(false); handleLogout(); }}>Logout</button>
               </>
             ) : (
               <>
