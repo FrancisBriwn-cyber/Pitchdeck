@@ -7,6 +7,7 @@ const { generalLimiter } = require('./middleware/rateLimiter');
 const authRoutes = require('./routes/auth');
 const pitchRoutes = require('./routes/pitches');
 const userRoutes = require('./routes/users');
+const notificationRoutes = require('./routes/notifications');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use(generalLimiter);
 app.use('/api/auth', authRoutes);
 app.use('/api/pitches', pitchRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 // Health check
 app.get('/', (req, res) => res.json({ message: 'PitchDeck API is running.' }));

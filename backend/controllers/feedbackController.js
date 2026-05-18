@@ -37,6 +37,13 @@ const submitFeedback = async (req, res) => {
       [pitch_id, req.user.id, what_i_like, would_change, would_use]
     );
 
+    // Notify the pitch owner (fire-and-forget — don't fail the request if this errors)
+    pool.query(
+      `INSERT INTO notifications (user_id, pitch_id, actor_name)
+       VALUES ($1, $2, $3)`,
+      [pitchResult.rows[0].user_id, pitch_id, req.user.name]
+    ).catch((e) => console.error('Notification insert error:', e));
+
     res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error('Feedback error:', err);
